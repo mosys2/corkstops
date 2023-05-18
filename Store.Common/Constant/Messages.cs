@@ -10,7 +10,11 @@ namespace Store.Common.Constant
     {
         public class ErrorsMessage
         {
-            public const string Register = "Succesfull";
+            public const string RegisterFeaild = "Register feaild!";
+        }
+        public class Message
+        {
+            public const string RegisterSuccess = "Register successs!";
         }
     }
 }

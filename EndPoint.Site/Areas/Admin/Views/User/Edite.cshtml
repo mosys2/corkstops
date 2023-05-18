@@ -28,15 +28,16 @@
                 <div id="form-validation" class="p-5">
                     <div class="preview">
                         <form method="post" Id="UserForm">
+                            <input asp-for="Id" type="hidden" />
                             <!-- BEGIN: Validation Form -->
                             <div class="input-form">
                                 <label asp-for="Name" class="form-label w-full flex flex-col sm:flex-row"> Name <span class="sm:ml-auto mt-1 sm:mt-0 text-xs text-slate-500">Required, at least 2 characters</span> </label>
-                                <input asp-for="Name" type="text" class="form-control" placeholder="Name">
+                                <input asp-for="Name" type="text" class="form-control mb-1" placeholder="Name">
                                 <span asp-validation-for="Name" class="pristine-error text-danger mt-2"></span>
                             </div>
                             <div class="input-form mt-3">
                                 <label asp-for="LastName" class="form-label w-full flex flex-col sm:flex-row"> Last Name <span class="sm:ml-auto mt-1 sm:mt-0 text-xs text-slate-500">Required, at least 2 characters</span> </label>
-                                <input asp-for="LastName" type="text" class="form-control" placeholder="Last Name">
+                                <input asp-for="LastName" type="text" class="form-control mb-1" placeholder="Last Name">
                                 <span asp-validation-for="LastName" class="pristine-error text-danger mt-2"></span>
                             </div>
                             <div class="input-form mt-3">
@@ -72,22 +73,22 @@
                             </div>
                             <div class="input-form mt-3">
                                 <label asp-for="Mobile" class="form-label w-full flex flex-col sm:flex-row"> Mobile <span class="sm:ml-auto mt-1 sm:mt-0 text-xs text-slate-500">Required, Number only &amp; max and min 11 characters</span> </label>
-                                <input asp-for="Mobile" type="number" class="form-control" placeholder="Mobile">
+                                <input asp-for="Mobile" type="number" class="form-control mb-1" placeholder="Mobile">
                                 <span asp-validation-for="Mobile" class="pristine-error text-danger mt-2"></span>
                             </div>
                             <div class="input-form mt-3">
                                 <label asp-for="Email" class="form-label w-full flex flex-col sm:flex-row"> Email <span class="sm:ml-auto mt-1 sm:mt-0 text-xs text-slate-500">Required, email address format</span> </label>
-                                <input asp-for="Email" type="email" class="form-control" placeholder="example@gmail.com">
+                                <input asp-for="Email" type="email" class="form-control mb-1" placeholder="example@gmail.com">
                                 <span asp-validation-for="Email" class="pristine-error text-danger mt-2"></span>
                             </div>
                             <div class="input-form mt-3">
                                 <label asp-for="Username" class="form-label w-full flex flex-col sm:flex-row"> Username <span class="sm:ml-auto mt-1 sm:mt-0 text-xs text-slate-500">Required, at least 2 characters</span> </label>
-                                <input asp-for="Username" type="text" class="form-control" placeholder="Username" minlength="2" required="">
+                                <input asp-for="Username" type="text" class="form-control mb-1" placeholder="Username" minlength="2" required="">
                                 <span asp-validation-for="Username" class="pristine-error text-danger mt-2"></span>
                             </div>
                             <div class="input-form mt-3">
                                 <label asp-for="Address" class="form-label w-full flex flex-col sm:flex-row"> Address </label>
-                                <textarea asp-for="Address" class="form-control" placeholder="Type your Address"></textarea>
+                                <textarea asp-for="Address" class="form-control mb-1" placeholder="Type your Address"></textarea>
                             </div>
                             <button type="submit" class="btn btn-primary mt-5 frm-register-user">Edite</button>
 
@@ -135,26 +136,29 @@
                     rollsItem.push(parseInt($(sel).val()));
                 });
                 let elementItems = e.target;
-                let Name = elementItems.Name.value
-                let LastName = elementItems.LastName.value
-                let Rolls = rollsItem
-                let Gender = elementItems.Gender.value
+                let Id = elementItems.Id.value;
+                let Name = elementItems.Name.value;
+                let LastName = elementItems.LastName.value;
+                let Rolls = rollsItem;
+                let Gender = elementItems.Gender.value;
                 let IsActive = $('#IsActive').is(':checked') ? true : false
-                let Mobile = elementItems.Mobile.value
-                let Email = elementItems.Email.value
-                let Username = elementItems.Username.value
-                let Address = elementItems.Address.value
+                let Mobile = elementItems.Mobile.value;
+                let Email = elementItems.Email.value;
+                let Username = elementItems.Username.value;
+                let Address = elementItems.Address.value;
 
                 var data = {
-                    Name, LastName, Rolls, Gender, IsActive, Mobile, Email, Username, Address
+                   Id, Name, LastName, Rolls, Gender, IsActive, Mobile, Email, Username, Address
                 }
                 console.log(data);
                 //ajax request
                 ajaxFunc("Edite", data, "POST",
                     function (result) {
                         if (result.isSuccess) {
-                            $("#UserForm").trigger("reset");
                             successToastify.showToast();
+                            setTimeout(function(){
+                                window.location.href = "/admin/user/";
+                            },2000);
                         } else {
                             dangerToastify.showToast();
                         }

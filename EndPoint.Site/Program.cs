@@ -1,5 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Store.Application.Interfaces.Contexts;
+using Store.Application.Services.Common;
+using Store.Application.Services.Users.Commands.EditeUser;
 using Store.Application.Services.Users.Commands.RegisterUser;
 using Store.Application.Services.Users.Commands.RemoveUser;
 using Store.Application.Services.Users.Queries.GetAllRolls;
@@ -21,10 +23,10 @@ builder.Services.AddScoped<IGetAllRolls_ForAdmin, GetAllRolls_ForAdmin>();
 builder.Services.AddScoped<IRegisterUser_Admin, RegisterUser_Admin>();
 builder.Services.AddScoped<IRemoveUserServices_Admin, RemoveUserServices_Admin>();
 builder.Services.AddScoped<IGetUserDetailServices, GetUserDetailServices>();
-
-
-
-
+builder.Services.AddScoped<IEditeUserServicess, EditeUserServicess>();
+builder.Services.AddScoped<ICheckUserExistByEmailServices, CheckUserExistByEmailServices>();
+builder.Services.AddScoped<ICheckUserExistByMobileServices, CheckUserExistByMobileServices>();
+builder.Services.AddScoped<ICheckUserExistByUsernameServices, CheckUserExistByUsernameServices>();
 
 var app = builder.Build();
 
